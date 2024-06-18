@@ -1,0 +1,341 @@
+{
+  "stores": [
+    {
+      "id": 1,
+      "name": "Artisan Jewelers",
+      "description": "Fine handcrafted jewelry.",
+      "products": [
+        {
+          "id": 1,
+          "name": "Handmade Silver Ring",
+          "category": "joaillerie",
+          "description": "A beautiful handmade silver ring with intricate designs.",
+          "image_name": "silver_ring.png",
+          "price": 75.00
+        },
+        {
+          "id": 2,
+          "name": "Gold Necklace",
+          "category": "joaillerie",
+          "description": "Elegant gold necklace with a minimalist design.",
+          "image_name": "gold_necklace.png",
+          "price": 150.00
+        },
+        {
+          "id": 3,
+          "name": "Gemstone Earrings",
+          "category": "joaillerie",
+          "description": "Colorful gemstone earrings perfect for any occasion.",
+          "image_name": "gemstone_earrings.png",
+          "price": 50.00
+        },
+        {
+          "id": 4,
+          "name": "Wooden Carved Box",
+          "category": "décoration",
+          "description": "Hand-carved wooden box with detailed patterns.",
+          "image_name": "wooden_box.png",
+          "price": 40.00
+        },
+        {
+          "id": 5,
+          "name": "Ceramic Vase",
+          "category": "décoration",
+          "description": "Beautiful ceramic vase with hand-painted designs.",
+          "image_name": "ceramic_vase.png",
+          "price": 60.00
+        },
+        {
+          "id": 9,
+          "name": "Pearl Bracelet",
+          "category": "joaillerie",
+          "description": "Classic pearl bracelet with sterling silver clasp.",
+          "image_name": "pearl_bracelet.png",
+          "price": 80.00
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Decor Delights",
+      "description": "Unique decorative items for your home.",
+      "products": [
+        {
+          "id": 4,
+          "name": "Wooden Carved Box",
+          "category": "décoration",
+          "description": "Hand-carved wooden box with detailed patterns.",
+          "image_name": "wooden_box.png",
+          "price": 40.00
+        },
+        {
+          "id": 5,
+          "name": "Ceramic Vase",
+          "category": "décoration",
+          "description": "Beautiful ceramic vase with hand-painted designs.",
+          "image_name": "ceramic_vase.png",
+          "price": 60.00
+        },
+        {
+          "id": 6,
+          "name": "Handwoven Basket",
+          "category": "décoration",
+          "description": "A handwoven basket made from natural materials.",
+          "image_name": "handwoven_basket.png",
+          "price": 35.00
+        },
+        {
+          "id": 7,
+          "name": "Decorative Pillow",
+          "category": "décoration",
+          "description": "A decorative pillow with intricate embroidery.",
+          "image_name": "decorative_pillow.png",
+          "price": 25.00
+        },
+        {
+          "id": 8,
+          "name": "Stained Glass Lamp",
+          "category": "décoration",
+          "description": "A stunning stained glass lamp to brighten any room.",
+          "image_name": "stained_glass_lamp.png",
+          "price": 120.00
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Elegant Gems",
+      "description": "Luxury handmade jewelry.",
+      "products": [
+        {
+          "id": 1,
+          "name": "Handmade Silver Ring",
+          "category": "joaillerie",
+          "description": "A beautiful handmade silver ring with intricate designs.",
+          "image_name": "silver_ring.png",
+          "price": 75.00
+        },
+        {
+          "id": 2,
+          "name": "Gold Necklace",
+          "category": "joaillerie",
+          "description": "Elegant gold necklace with a minimalist design.",
+          "image_name": "gold_necklace.png",
+          "price": 150.00
+        },
+        {
+          "id": 9,
+          "name": "Pearl Bracelet",
+          "category": "joaillerie",
+          "description": "Classic pearl bracelet with sterling silver clasp.",
+          "image_name": "pearl_bracelet.png",
+          "price": 80.00
+        },
+        {
+          "id": 10,
+          "name": "Handcrafted Pendant",
+          "category": "joaillerie",
+          "description": "Unique handcrafted pendant with precious stones.",
+          "image_name": "handcrafted_pendant.png",
+          "price": 95.00
+        },
+        {
+          "id": 3,
+          "name": "Gemstone Earrings",
+          "category": "joaillerie",
+          "description": "Colorful gemstone earrings perfect for any occasion.",
+          "image_name": "gemstone_earrings.png",
+          "price": 50.00
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Handcrafted Wonders",
+      "description": "A variety of handcrafted items.",
+      "products": [
+        {
+          "id": 5,
+          "name": "Ceramic Vase",
+          "category": "décoration",
+          "description": "Beautiful ceramic vase with hand-painted designs.",
+          "image_name": "ceramic_vase.png",
+          "price": 60.00
+        },
+        {
+          "id": 6,
+          "name": "Handwoven Basket",
+          "category": "décoration",
+          "description": "A handwoven basket made from natural materials.",
+          "image_name": "handwoven_basket.png",
+          "price": 35.00
+        },
+        {
+          "id": 11,
+          "name": "Leather Wallet",
+          "category": "joaillerie",
+          "description": "Handcrafted leather wallet with multiple compartments.",
+          "image_name": "leather_wallet.png",
+          "price": 55.00
+        },
+        {
+          "id": 12,
+          "name": "Beaded Necklace",
+          "category": "joaillerie",
+          "description": "Beautiful beaded necklace with colorful beads.",
+          "image_name": "beaded_necklace.png",
+          "price": 45.00
+        },
+        {
+          "id": 7,
+          "name": "Decorative Pillow",
+          "category": "décoration",
+          "description": "A decorative pillow with intricate embroidery.",
+          "image_name": "decorative_pillow.png",
+          "price": 25.00
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Crafted Home",
+      "description": "Handmade items for your home.",
+      "products": [
+        {
+          "id": 4,
+          "name": "Wooden Carved Box",
+          "category": "décoration",
+          "description": "Hand-carved wooden box with detailed patterns.",
+          "image_name": "wooden_box.png",
+          "price": 40.00
+        },
+        {
+          "id": 13,
+          "name": "Silk Scarf",
+          "category": "joaillerie",
+          "description": "Luxurious silk scarf with hand-painted designs.",
+          "image_name": "silk_scarf.png",
+          "price": 70.00
+        },
+        {
+          "id": 14,
+          "name": "Pottery Bowl",
+          "category": "décoration",
+          "description": "Handmade pottery bowl with unique glazing.",
+          "image_name": "pottery_bowl.png",
+          "price": 50.00
+        },
+        {
+          "id": 15,
+          "name": "Metal Sculptures",
+          "category": "décoration",
+          "description": "Set of handcrafted metal sculptures.",
+          "image_name": "metal_sculptures.png",
+          "price": 150.00
+        },
+        {
+          "id": 8,
+          "name": "Stained Glass Lamp",
+          "category": "décoration",
+          "description": "A stunning stained glass lamp to brighten any room.",
+          "image_name": "stained_glass_lamp.png",
+          "price": 120.00
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Jewel Creations",
+      "description": "Exquisite handmade jewelry pieces.",
+      "products": [
+        {
+          "id": 1,
+          "name": "Handmade Silver Ring",
+          "category": "joaillerie",
+          "description": "A beautiful handmade silver ring with intricate designs.",
+          "image_name": "silver_ring.png",
+          "price": 75.00
+        },
+        {
+          "id": 10,
+          "name": "Handcrafted Pendant",
+          "category": "joaillerie",
+          "description": "Unique handcrafted pendant with precious stones.",
+          "image_name": "handcrafted_pendant.png",
+          "price": 95.00
+        },
+        {
+          "id": 3,
+          "name": "Gemstone Earrings",
+          "category": "joaillerie",
+          "description": "Colorful gemstone earrings perfect for any occasion.",
+          "image_name": "gemstone_earrings.png",
+          "price": 50.00
+        },
+        {
+          "id": 9,
+          "name": "Pearl Bracelet",
+          "category": "joaillerie",
+          "description": "Classic pearl bracelet with sterling silver clasp.",
+          "image_name": "pearl_bracelet.png",
+          "price": 80.00
+        },
+        {
+          "id": 12,
+          "name": "Beaded Necklace",
+          "category": "joaillerie",
+          "description": "Beautiful beaded necklace with colorful beads.",
+          "image_name": "beaded_necklace.png",
+          "price": 45.00
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Artisan Treasures",
+      "description": "A curated selection of handmade treasures.",
+      "products": [
+        {
+          "id": 5,
+          "name": "Ceramic Vase",
+          "category": "décoration",
+          "description": "Beautiful ceramic vase with hand-painted designs.",
+          "image_name": "ceramic_vase.png",
+          "price": 60.00
+        },
+        {
+          "id": 11,
+          "name": "Leather Wallet",
+          "category": "joaillerie",
+          "description": "Handcrafted leather wallet with multiple compartments.",
+          "image_name": "leather_wallet.png",
+          "price": 55.00
+        },
+        {
+          "id": 13,
+          "name": "Silk Scarf",
+          "category": "joaillerie",
+          "description": "Luxurious silk scarf with hand-painted designs.",
+          "image_name": "silk_scarf.png",
+          "price": 70.00
+        },
+        {
+          "id": 14,
+          "name": "Pottery Bowl",
+          "category": "décoration",
+          "description": "Handmade pottery bowl with unique glazing.",
+          "image_name": "pottery_bowl.png",
+          "price": 50.00
+        },
+        {
+          "id": 15,
+          "name": "Metal Sculptures",
+          "category": "décoration",
+          "description": "Set of handcrafted metal sculptures.",
+          "image_name": "metal_sculptures.png",
+          "price": 150.00
+        }
+      ]
+    }
+  ]
+}
