@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     /**
          * @OA\Get(
-         *     path="/products_all",
+         *     path="/products",
          *     tags={"Products"},
          *     summary="Get list of all products",
          *     description="Returns list of products",
@@ -47,13 +47,42 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
+/**
+     * @OA\Get(
+     *     path="/products/{id}",
+     *     operationId="getProductById",
+     *     tags={"Products"},
+     *     summary="Get product details by ID",
+     *     description="Returns details of a specific product by ID.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the product to retrieve",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="9x508988-2d3g-44f6-ac72-0f93eac22rrd"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\MediaType(
+     *             mediaType="text/html"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Product not found"
+     *     )
+     * )
      */
-    public function show(Product $produit)
+
+    public function show($id)
     {
         //
-
+        $product = Product::findOrFail($id);
+        return view('product', ['product' => $product]);
     }
 
     /**

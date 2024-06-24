@@ -5,12 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\shop;
 use App\Http\Requests\StoreShopRequest;
 use App\Http\Requests\UpdateShopRequest;
-
+ /**
+     * @OA\Info(
+     *     title="Shop API",
+     *     version="1.0.0",
+     *     description="API for managing shops",
+     * )
+     */
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+      /**
+          * @OA\Get(
+          *     path="/shops",
+          *     operationId="getShops",
+          *     tags={"Shops"},
+          *     summary="Get list of all shops",
+          *     description="Returns a list of all shops.",
+          *     @OA\Response(
+          *         response=200,
+          *         description="Successful operation",
+          *         @OA\MediaType(
+          *             mediaType="text/html"
+          *         )
+          *     )
+          * )
+          */
     public function index()
     {
         //

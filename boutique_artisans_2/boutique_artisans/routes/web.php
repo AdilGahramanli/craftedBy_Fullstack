@@ -8,6 +8,18 @@ Route::get('/', function () {
 
 Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index']);
 Route::get('/shops', [\App\Http\Controllers\ShopController::class, 'index']);
+Route::get('/products/{id}', [\App\Http\Controllers\ProductController::class, 'show']);
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function() {
+return view('auth.register');})->name('register');
+
+Route::get('/dashboard', function () {
+    return 'Welcome to your dashboard!';
+})->middleware(['auth']);
 
 /*Route::get('/products', function () {
     return view('products', ['name' => 'James']);
