@@ -13,9 +13,9 @@ const cartStore = useCartStore()
   <h2>Mon panier</h2>
   <ul>
     <li v-for="(product, index) in cartStore.getAllCartProductsToString" :key="index" class="w-200 border-2">
-      <p>{{ product.id }} - {{ product.title }} - {{ product.price }} € - quantité: {{product.quantity}} </p>
+      <p>{{ product.id }} - {{ product.name }} - {{ product.price }} € </p>
       <p>Total prix: {{cartStore.getTotalPrice}}</p>
-      <button @click="cartStore.removeFromCart(index)">Remove</button>
+      <button class="border-2 bg-red-500" @click="cartStore.removeFromCart(index)">Remove</button>
     </li>
 <!--    <p>Votre panier contient {{cartStore.getTotalQuantity}} produits.</p>-->
 <!--        <p class="text-xl">{{ // getTotalPrice({{ product }}) }}</p>-->

@@ -10,6 +10,16 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: () =>  import('../views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () =>  import('../views/Register.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -21,6 +31,11 @@ const router = createRouter({
       path: '/products',
       name: 'products',
       component:() => import('../views/ProductsView.vue')
+    },
+    {
+      path: '/products/:id',
+      name: 'productsIndex',
+      component:() => import('../views/ProductDetailsView.vue')
     },
     {
       path: '/cart',
@@ -42,12 +57,12 @@ const router = createRouter({
       name: 'store',
       component:() => import ('../views/StoreView.vue')
     },
+
     {
-      path: '/products/:id',
-      name: 'productsIndex',
-      component:() => import('../views/ProductDetailsView.vue')
+      path: '/user',
+      name: 'user',
+      component: () => import('../views/User.vue')
     }
-  ]
-})
+]})
 
 export default router

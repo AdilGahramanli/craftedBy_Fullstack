@@ -8,6 +8,7 @@ export const useCartStore = defineStore('cart', {
   // Actions: Methods to manipulate the state of the cart
   actions: {
     addToCart(product) {
+      //Maybe remove the parentheses after this ??
       if(this.cart.includes(product)) {
         product.quantity+=1;
         product.priceTotal=product.priceTotal + product.price;
@@ -17,7 +18,6 @@ export const useCartStore = defineStore('cart', {
         product['quantity']=1;
         product['priceTotal']=product['price']
       }
-
     },
     removeFromCart(idx) {
       this.cart.splice(idx,1 );
@@ -38,4 +38,6 @@ export const useCartStore = defineStore('cart', {
   // Enable persistence of the cart state
     persist: true
 })
+
+
 

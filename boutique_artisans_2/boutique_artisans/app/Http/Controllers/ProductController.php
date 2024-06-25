@@ -24,8 +24,10 @@ class ProductController extends Controller
     {
         //
         //return \App\Models\Product::all();
-        $products = Product::all();
-        return view('products', ['products' => $products]);
+        /*$products = Product::all();
+        return view('products', ['products' => $products]);*/
+
+        return $products = Product::all();
 
     }
 
@@ -81,8 +83,10 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-        $product = Product::findOrFail($id);
-        return view('product', ['product' => $product]);
+        /*$product = Product::findOrFail($id);
+        return view('product', ['product' => $product]);*/
+
+        return $product = Product::findOrFail($id);
     }
 
     /**

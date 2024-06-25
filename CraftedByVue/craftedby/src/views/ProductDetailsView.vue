@@ -13,7 +13,7 @@ const productSelected=ref(null)
 // Extracts the product ID from the route parameters
 const productId =  route.params.id
   // Fetches product details from the API based on the product ID and stores it in the reactive variable
-fetch(`https://fakestoreapi.com/products/${productId}`)
+fetch(`http://127.0.0.1:8000/api/products/${productId}`)
   .then(res=>res.json())
   .then(json=>productSelected.value=json)
 
@@ -21,7 +21,7 @@ fetch(`https://fakestoreapi.com/products/${productId}`)
 
 <template>
 <!--  Displays the product details-->
-          <h2 class="card-title text-3xl text-center box-border">{{ productSelected.title }}</h2>
+          <h2 class="card-title text-3xl text-center box-border">{{ productSelected.name }}</h2>
           <figure class="w-32"><img  :src="productSelected.image" alt="image of product"></figure>
           <p class="text-center box-border">{{ productSelected.description }}</p>
           <p class="text-center box-border"><strong>Category:</strong> {{ productSelected.category }}</p>
