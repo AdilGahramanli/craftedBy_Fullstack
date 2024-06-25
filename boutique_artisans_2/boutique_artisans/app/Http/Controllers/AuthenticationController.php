@@ -11,6 +11,8 @@ class AuthenticationController extends Controller
     public function user(Request $request)
     {
         return $request->user();
+        //return $user = User::findOrFail($id);
+        //return $users = User::all();
     }
 
     public function register(Request $request)
