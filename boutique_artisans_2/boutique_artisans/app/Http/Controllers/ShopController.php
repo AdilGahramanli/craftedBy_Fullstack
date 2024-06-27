@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\shop;
 use App\Http\Requests\StoreShopRequest;
 use App\Http\Requests\UpdateShopRequest;
- /**
-     * @OA\Info(
-     *     title="Shop API",
-     *     version="1.0.0",
-     *     description="API for managing shops",
-     * )
-     */
+
 class ShopController extends Controller
 {
       /**

@@ -1,10 +1,20 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Shop API",
-        "description": "API for managing shops",
+        "title": "Crafted By API",
+        "description": "All the routes for the Crafted By shop.",
+        "contact": {
+            "name": "Crafted By Team",
+            "email": "maxime@dysign.fr"
+        },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "API Server"
+        }
+    ],
     "paths": {
         "/products": {
             "get": {

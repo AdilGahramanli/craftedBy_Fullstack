@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     /**
          * @OA\Get(
-         *     path="/api/products",
+         *     path="/products",
          *     tags={"Products"},
          *     summary="Get list of all products",
          *     description="Returns list of products",
