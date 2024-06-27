@@ -25,48 +25,25 @@
   </div>
 </template>
 
-<script>
-import {tokenStore} from "@/stores/token.js";
-import {onMounted, ref} from 'vue';
+<script setup>
+//import {tokenStore} from "@/stores/token.js";
+import {onMounted} from 'vue';
+import {useAuthStore} from "@/stores/auth.js";
 
-const token_Store = tokenStore();
-const current_token = ref(null);
+/*const token_Store = tokenStore();
+const current_token = ref(null);*/
+const authStore = useAuthStore();
 
 onMounted(  ()  => {
       ////fetching the laravel login route
-      fetch('urlBackend')
+      fetch('http://127.0.0.1:8000/api/login')
           .then(res => res.json())
-          .then(json => current_token.value = json)
+          .then(json => authStore.value = json)
           .catch(error => {
             console.error("there was an error !", error);
           });
-    });
+    })
 
-
-export default {
-  data() {
-    return {
-      email: '',
-      password: '',
-      error: null
-    }
-  },
-  methods: {
-    async login() {
-      try {
-        const response = await axios.post('http://your-laravel-app.test/api/login', {
-          email: this.email,
-          password: this.password
-        });
-        // Handle successful login, e.g., save token and redirect
-        localStorage.setItem('token', response.data.token);
-        this.$router.push('/dashboard'); // Replace with your desired route
-      } catch (error) {
-        this.error = 'Login failed: ' + (error.response.data.message || 'Unknown error');
-      }
-    }
-  }
-}
 </script>
 
 <style scoped>
