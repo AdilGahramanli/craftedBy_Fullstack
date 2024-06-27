@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import {tokenStore} from "@/stores/token.js";
 import {onMounted, ref} from 'vue';
 
