@@ -26,23 +26,25 @@
 </template>
 
 <script setup>
-import {tokenStore} from "@/stores/token.js";
-import {onMounted, ref} from 'vue';
+//import {tokenStore} from "@/stores/token.js";
+import {onMounted} from 'vue';
+import {useAuthStore} from "@/stores/auth.js";
 
-const token_Store = tokenStore();
-const current_token = ref(null);
+/*const token_Store = tokenStore();
+const current_token = ref(null);*/
+const authStore = useAuthStore();
 
 onMounted(  ()  => {
       ////fetching the laravel login route
-      fetch('urlBackend')
+      fetch('http://127.0.0.1:8000/api/login')
           .then(res => res.json())
-          .then(json => current_token.value = json)
+          .then(json => authStore.value = json)
           .catch(error => {
             console.error("there was an error !", error);
           });
-    });
+    })
 
-
+/*
 export default {
   data() {
     return {
@@ -67,6 +69,7 @@ export default {
     }
   }
 }
+*/
 </script>
 
 <style scoped>
