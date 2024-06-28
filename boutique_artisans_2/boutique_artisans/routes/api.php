@@ -22,6 +22,11 @@ Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'
 Route::get('/shops', [\App\Http\Controllers\ShopController::class, 'index']);
 Route::get('/products/{id}', [\App\Http\Controllers\ProductController::class, 'show']);
 
+Route::middleware('api')->get('/csrf-token', function () {
+    return response()->json(['csrfToken' => csrf_token()]);
+});
+
+
 Route::post('/register', [\App\Http\Controllers\AuthenticationController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\AuthenticationController::class, 'logout'])->middleware('auth:sanctum');

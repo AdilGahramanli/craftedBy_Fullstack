@@ -1,40 +1,43 @@
 <script setup>
+import { useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { useCartStore } from '@/stores/cart.js';
 
-import { useRoute } from 'vue-router'
-import {ref} from 'vue'
-import {useCartStore} from '@/stores/cart.js'
+const cartStore = useCartStore();
+const route = useRoute();
+const productSelected = ref(null);
+const productId = route.params.id;
 
-
-const cartStore = useCartStore()
-// Gets access to the current route to extract route parameters
-const route = useRoute()
-// Defines a reactive variable to store the selected product details
-const productSelected=ref(null)
-// Extracts the product ID from the route parameters
-const productId =  route.params.id
-  // Fetches product details from the API based on the product ID and stores it in the reactive variable
 fetch(`http://127.0.0.1:8000/api/products/${productId}`)
-  .then(res=>res.json())
-  .then(json=>productSelected.value=json)
-
+    .then(res => res.json())
+    .then(json => productSelected.value = json);
 </script>
 
 <template>
-<!--  Displays the product details-->
-          <h2 class="card-title text-3xl text-center box-border">{{ productSelected.name }}</h2>
-          <figure class="w-32"><img  :src="productSelected.image" alt="image of product"></figure>
-          <p class="text-center box-border">{{ productSelected.description }}</p>
-          <p class="text-center box-border"><strong>Category:</strong> {{ productSelected.category }}</p>
-          <p class="text-center box-border"><strong>Price:</strong> {{ productSelected.price }} €</p>
-          <div class="grid grid-cols-2 items-center align-baseline">
-            <button class="btn btn-primary bg-gray-300 self-center box-border mx-5" @click="cartStore.addToCart(productSelected)">
-              Add to Cart
-            </button>
-            </div>
-
-
+  <div class="product-details p-12 bg-fond">
+    <h2 class="card-title text-5xl text-center box-border text-rose-peau mb-8">{{ productSelected.name }}</h2>
+    <figure class="w-full h-96 flex justify-center items-center overflow-hidden bg-gray-200 mb-6">
+      <img :src="productSelected.image" alt="image of product" class="object-contain h-full">
+    </figure>
+    <p class="text-center box-border text-gray-700 mb-4">{{ productSelected.description }}</p>
+    <p class="text-center box-border text-gray-700 mb-4"><strong>Category:</strong> {{ productSelected.category }}</p>
+    <p class="text-center box-border text-gray-700 mb-4"><strong>Price:</strong> {{ productSelected.price }} €</p>
+    <div class="flex justify-center mt-8">
+      <button class="btn bg-rose-peau text-white self-center box-border mx-5 py-2 px-4 rounded" @click="cartStore.addToCart(productSelected)">
+        Add to Cart
+      </button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-
+.bg-fond {
+  background-color: #f8f8f8;
+}
+.text-rose-peau {
+  color: #f06292; /* Adjust this color to match your design */
+}
+.bg-rose-peau {
+  background-color: #f06292; /* Adjust this color to match your design */
+}
 </style>
