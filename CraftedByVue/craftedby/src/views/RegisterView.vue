@@ -29,47 +29,61 @@ const email = ref('');
 const password = ref('');
 
 const getNewCsrfToken = async () => {
-  const response = await fetch('http://127.0.0.1:8000/api/csrf-token', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-    },
-  });
-  const data = await response.json();
-  return data.csrfToken;
+  try {
+    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      credentials: 'include'  // Ensure cookies are included
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // No need to return anything as the cookie is automatically set
+  } catch (error) {
+    console.error('An error occurred while fetching CSRF token:', error);
+  }
 };
 
 const register = async () => {
-  const csrfToken = await getNewCsrfToken();
-  if (!csrfToken) {
-    console.error('CSRF token not found');
-    return;
-  }
+  // await getNewCsrfToken();
 
-  const response = await fetch('http://127.0.0.1:8000/api/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-CSRF-TOKEN': csrfToken,
-    },
-    body: JSON.stringify({
-      name: name.value,
-      email: email.value,
-      password: password.value,
-    }),
-  });
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      credentials: 'include',  // Ensure cookies are included
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      }),
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (response.ok) {
-    console.log('Registration successful:', data);
-  } else {
-    console.error('Registration failed:', data);
+    if (response.ok) {
+      console.log('Registration successful:', data);
+    } else {
+      console.error('Registration failed:', data);
+    }
+  } catch (error) {
+    console.error('An error occurred during registration:', error);
   }
 };
 </script>
 
 <style scoped>
-/* Add your styles here if necessary */
+.bg-rose-peau {
+  background-color: #f06292; /* Adjust this color to match your design */
+}
+.bg-fond {
+  background-color: #f8f8f8;
+}
 </style>

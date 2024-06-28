@@ -23,35 +23,50 @@ import { ref } from 'vue';
 const email = ref('');
 const password = ref('');
 
-const getCsrfToken = () => {
-  return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const getNewCsrfToken = async () => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      credentials: 'include'  // Ensure cookies are included
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error('An error occurred while fetching CSRF token:', error);
+  }
 };
 
 const login = async () => {
-  const csrfToken = getCsrfToken();
-  const response = await fetch('http://127.0.0.1:8000/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-CSRF-TOKEN': csrfToken,
-    },
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value,
-    }),
-  });
+  await getNewCsrfToken();
 
-  const data = await response.json();
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      credentials: 'include',  // Ensure cookies are included
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
 
-  if (response.ok) {
-    // Handle successful login
-    console.log('Login successful:', data);
-    // You can redirect the user or show a success message
-  } else {
-    // Handle login error
-    console.error('Login failed:', data);
-    // Show an error message to the user
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log('Login successful:', data);
+    } else {
+      console.error('Login failed:', data);
+    }
+  } catch (error) {
+    console.error('An error occurred during login:', error);
   }
 };
 </script>

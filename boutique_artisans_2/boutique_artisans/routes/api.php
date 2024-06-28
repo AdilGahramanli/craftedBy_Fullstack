@@ -22,7 +22,9 @@ Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'
 Route::get('/shops', [\App\Http\Controllers\ShopController::class, 'index']);
 Route::get('/products/{id}', [\App\Http\Controllers\ProductController::class, 'show']);
 
+
 Route::middleware('api')->get('/csrf-token', function () {
+return 'toto';
     return response()->json(['csrfToken' => csrf_token()]);
 });
 
