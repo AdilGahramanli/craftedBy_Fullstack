@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('orders_uuid')->primary();
+            $table->foreignUuid('user_id')->constrained('users');
             $table->date('date');
             $table->integer('total');
             $table->timestamps();

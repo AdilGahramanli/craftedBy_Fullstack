@@ -13,12 +13,13 @@ class Order extends Model
 
     protected $fillable = [
       "date",
-        "total"
+        "total",
+        "order_id"
     ];
 
-    public function product(): BelongsTo
+    public function product(): BelongsToMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('name','price');
     }
 
     public function user(): BelongsTo
@@ -26,7 +27,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orders(): BelongsToMany {
-        return $this->belongsToMany(User::class);
-    }
+
+
+
+
+
 }

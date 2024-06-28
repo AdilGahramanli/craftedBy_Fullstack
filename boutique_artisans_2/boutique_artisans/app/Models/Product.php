@@ -41,7 +41,9 @@ class Product extends Model
     // The 'orders' method defines a many-to-many relationship between the Product and Order models.
     public function orders(): BelongsToMany {
         // This product belongs to many orders, with additional pivot data like quantity, color, and size.
-        return $this->belongsToMany(Order::class)->withPivot('quantity', 'color', 'size');
+        return $this->belongsToMany(Order::class, 'order_products')->withPivot('quantity', 'color', 'size');
     }
+
+
 
 }

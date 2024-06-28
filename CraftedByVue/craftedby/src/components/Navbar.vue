@@ -21,20 +21,20 @@
     </div>
 
     <div class="flex items-center">
-      <RouterLink to="/cart" class="mr-4 flex items-center justify-center">
+      <router-link to="/cart" class="mr-4 flex items-center justify-center">
         <img class="w-10 h-10" src="../assets/cartlogo.png" />
-      </RouterLink>
+      </router-link>
       <details class="dropdown">
         <summary class="m-1 cursor-pointer flex items-center justify-center">
           <img src="../assets/menu.svg" class="w-10 h-10" />
         </summary>
         <ul class="p-2 shadow menu dropdown-content z-10 bg-base-100 rounded-box w-52">
-          <li><RouterLink to="/">Accueil</RouterLink></li>
-          <li><RouterLink to="/account">Mon profil</RouterLink></li>
-          <li><RouterLink to="/cart">Mon panier</RouterLink></li>
-          <li><RouterLink to="/products">Les produits</RouterLink></li>
-          <li><RouterLink to="/register">Register</RouterLink></li>
-          <li><RouterLink to="/login">Login</RouterLink></li>
+          <li><router-link to="/">Accueil</router-link></li>
+          <li><router-link to="/account">Mon profil</router-link></li>
+          <li><router-link to="/cart">Mon panier</router-link></li>
+          <li><router-link to="/products">Les produits</router-link></li>
+          <li><router-link to="/register">Register</router-link></li>
+          <li><router-link to="/login">Login</router-link></li>
         </ul>
       </details>
     </div>
@@ -43,7 +43,7 @@
 
 <style scoped>
 .bg-rose-peau {
-  background-color: #f06292; /* Adjust this color to match your design */
+  background-color: #ffc6b9; /* Adjust this color to match your design */
 }
 .bg-fond {
   background-color: #f8f8f8;
