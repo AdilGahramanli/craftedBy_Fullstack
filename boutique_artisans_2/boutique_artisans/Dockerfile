@@ -1,26 +1,32 @@
-FROM bitnami/laravel:latest
+# Utiliser l'image de base php-fpm
+FROM bitnami/php-fpm:8.3.3
 
-# Optionally, you can add additional PHP extensions or other customizations
-RUN install_packages php8.3 php8.3-mysql php8.3-xml php8.3-mbstring php8.3-bcmath
+# Installer Nginx et Supervisor
+RUN install_packages nginx supervisor
 
-# Set working directory
+# Installer les extensions PHP nécessaires via apt-get
+RUN install_packages php-pear php-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
+    && docker-php-ext-install gd mbstring pdo pdo_mysql bcmath
+
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy the application files
+# Copier les fichiers de l'application
 COPY . .
 
-# Install composer dependencies
+# Installer les dépendances Composer
 RUN composer install
 
-# Copy over the environment file
+# Copier le fichier .env et générer la clé de l'application
 COPY .env.example .env
-#.env.example
-# Generate the application key
 RUN php artisan key:generate
 
-# Expose the port for Laravel
-EXPOSE 8000
+# Copier les fichiers de configuration
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Start the Laravel application
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Exposer le port 80 pour Nginx
+EXPOSE 80
 
+# Lancer Supervisor qui gère Nginx et PHP-FPM
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

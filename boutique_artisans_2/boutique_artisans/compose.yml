@@ -20,7 +20,9 @@ services:
       retries: 5
 
   backend:
-    image: bitnami/laravel:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: CraftedBy_backend
     environment:
       DB_CONNECTION: mysql
@@ -30,7 +32,7 @@ services:
       DB_USERNAME: adilUser
       DB_PASSWORD: password
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
       - ${PWD}:/app
     networks:
@@ -39,7 +41,7 @@ services:
       mysql:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

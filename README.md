@@ -5,6 +5,9 @@
 ## Liste des dépendances
 -Laravel 11
 -MySql 5.7.44
+-PHP 8.3.3
+-php-fpm = bitnami/php-fpm:8.3.3
+
 
 ## Containeurisation
 Backend et BDD MySql sont les deux services du container CraftedBy_backend
