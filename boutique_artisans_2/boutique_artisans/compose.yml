@@ -1,0 +1,51 @@
+services:
+  mysql:
+    image: mysql:5.7.44
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: laravelArtisans
+      MYSQL_USER: adilUser
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - laravel-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: bitnami/laravel:latest
+    container_name: CraftedBy_backend
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravelArtisans
+      DB_USERNAME: adilUser
+      DB_PASSWORD: password
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${PWD}:/app
+    networks:
+      - laravel-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mysql-data:
+
+networks:
+  laravel-network:
