@@ -1,32 +1,31 @@
-# Utiliser l'image de base php-fpm
-FROM bitnami/php-fpm:8.3.3
+FROM bitnami/php-fpm:latest
 
-# Installer Nginx et Supervisor
-RUN install_packages nginx supervisor
+# Install additional PHP extensions
+RUN install_packages php8.3 php8.3-mysql php8.3-xml php8.3-mbstring php8.3-bcmath
 
-# Installer les extensions PHP nécessaires via apt-get
-RUN install_packages php-pear php-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
-    && docker-php-ext-install gd mbstring pdo pdo_mysql bcmath
-
-# Définir le répertoire de travail
+# Set working directory
 WORKDIR /app
 
-# Copier les fichiers de l'application
+# Copy the application files
 COPY . .
 
-# Installer les dépendances Composer
+# Install composer dependencies
 RUN composer install
 
-# Copier le fichier .env et générer la clé de l'application
+# Copy over the environment file
 COPY .env.example .env
+
+# Generate the application key
 RUN php artisan key:generate
 
-# Copier les fichiers de configuration
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Install Supervisor
+RUN install_packages supervisor
 
-# Exposer le port 80 pour Nginx
-EXPOSE 80
+# Copy Supervisor configuration file
+COPY supervisord.conf /etc/supervisord.conf
 
-# Lancer Supervisor qui gère Nginx et PHP-FPM
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Expose the port for php-fpm
+EXPOSE 9000
+
+# Start Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

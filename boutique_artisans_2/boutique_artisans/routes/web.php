@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
@@ -21,4 +21,4 @@ Route::get('/dashboard', function () {
 Route::get('/products', function () {
     return view('products', ['name' => 'James']);
 });
-*/
+
