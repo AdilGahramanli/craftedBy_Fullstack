@@ -32,7 +32,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/boutique_artisans_2/boutique_artisans:/app
     networks:
       - laravel-network
     depends_on:
@@ -43,6 +43,19 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  frontend:
+    build:
+      context: ./CraftedByVue/craftedby
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "8080:80"
+    networks:
+      - laravel-network
+    depends_on:
+      - backend
+
   nginx:
     image: nginx:alpine
     container_name: nginx_web
@@ -55,6 +68,8 @@ services:
       - laravel-network
     depends_on:
       - backend
+
+
 volumes:
   mysql-data:
 
