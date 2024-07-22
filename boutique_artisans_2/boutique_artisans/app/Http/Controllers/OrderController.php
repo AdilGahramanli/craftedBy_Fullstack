@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return response()->json($orders);
     }
 
     /**
@@ -32,24 +34,28 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-            $userId = User::all()->first()->id;
+        $user = Auth::user();
 
+        $order = Order::create([
+            'date' => now(),
+            'total' => $request->input('total'),
+        ]);
 
-            $order = Order::create([
-                'user_id' => $userId,
-                'total' => $request->input('total'),
-            ]);
+        $order->users()->attach($user->id);
 
-            foreach ($request->input('products') as $product) {
-                $order->products()->attach(
-                    $product['id'],
-                    ['quantity' => $product['quantity'],
-                    ]
-                );
-//                Product::find($product['id'])->decrement('stock', $product['quantity']);
-            }
-            $order->save();
-            return response()->json($order, 201);
+        foreach ($request->input('products') as $productData) {
+            $order->products()->attach(
+                $productData['id'],
+                [
+                    'quantity' => $productData['quantity'],
+                    'color' => $productData['color'] ?? null,
+                    'size' => $productData['size'] ?? null,
+                ]
+            );
+            Product::find($productData['id'])->decrement('stock', $productData['quantity']);
+        }
+
+        return response()->json($order, 201);
     }
 
     /**
@@ -57,7 +63,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return response()->json($order);
     }
 
     /**
@@ -73,7 +79,8 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $order->update($request->all());
+        return response()->json($order);
     }
 
     /**
@@ -81,20 +88,40 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return response()->json(null, 204);
     }
 
     public function attachProductToOrderToUser(Request $request)
     {
-        $user = User::all()->first();
-        $userId = $user->id;
-
+        $user = Auth::user();
         $productId = $request->input('product_id');
-        $product = Product::find($product_id);
+        $product = Product::find($productId);
 
-        // Create Order
-        // Attach product id qui vient de la request à cet order
-        // Attache cet order a mon user
-        // fin
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+
+        $order = Order::create([
+            'date' => now(),
+            'total' => $product->price,
+        ]);
+
+        $order->products()->attach($productId, ['quantity' => 1]);
+        $order->users()->attach($user->id);
+
+        return response()->json($order, 201);
+    }
+
+    public function removeProductFromOrder(Order $order, Product $product)
+    {
+        $order->products()->detach($product->id);
+        return response()->json(null, 204);
+    }
+
+    public function getProductsInOrder(Order $order)
+    {
+        $products = $order->products;
+        return response()->json($products);
     }
 }

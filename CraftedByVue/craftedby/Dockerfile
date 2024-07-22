@@ -7,17 +7,9 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-# Afficher le contenu du répertoire avant la construction
-RUN echo "Before build. Contents of /app:" && ls -al /app
-
 # Exécuter la commande de build et rediriger les logs vers un fichier
 RUN npm run build
 
-# Afficher le contenu du répertoire après la construction
-RUN echo "After build. Contents of /app:" && ls -al /app
-
-# Vérifiez que le répertoire `dist` a été créé
-RUN ls -al /app/dist
 
 # Étape 2 : Servir les fichiers avec Nginx
 FROM nginx:alpine

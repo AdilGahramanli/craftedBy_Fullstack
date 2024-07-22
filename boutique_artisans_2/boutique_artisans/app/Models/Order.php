@@ -12,24 +12,17 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-      "date",
+        "date",
         "total",
-        "order_id"
     ];
 
-    public function product(): BelongsToMany
+    public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'order_products')->withPivot('name','price');
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity', 'color', 'size');
     }
 
-    public function user(): BelongsTo
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'order_user');
     }
-
-
-
-
-
-
 }

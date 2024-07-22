@@ -13,6 +13,9 @@ export default defineConfig({
   build: {
     outDir: 'dist'
   },
+  define: {
+    'process.env.VITE_API_ENDPOINT': JSON.stringify('__VITE_API_ENDPOINT__')
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
