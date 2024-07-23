@@ -10,7 +10,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - laravel-network
+      - backend-network
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
       interval: 10s
@@ -18,7 +18,9 @@ services:
       retries: 5
 
   backend:
-    image: bitnami/laravel:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: CraftedBy_backend
     environment:
       DB_CONNECTION: mysql
@@ -32,7 +34,8 @@ services:
     volumes:
       - ${PWD}/boutique_artisans_2/boutique_artisans:/app
     networks:
-      - laravel-network
+      - backend-network
+      - traefik-network
     depends_on:
       mysql:
         condition: service_healthy
@@ -41,25 +44,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-
-
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx_web
-    ports:
-      - "80:80"
-    volumes:
-      - .:/var/www
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    networks:
-      - laravel-network
-    depends_on:
-      - backend
-
-
 volumes:
   mysql-data:
 
 networks:
-  laravel-network:
+  backend-network:
+
+  traefik-network:
+
