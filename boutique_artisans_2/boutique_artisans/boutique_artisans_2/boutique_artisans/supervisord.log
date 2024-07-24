@@ -1,0 +1,26 @@
+2024-07-24 13:19:32,681 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-07-24 13:19:32,687 INFO supervisord started with pid 1
+2024-07-24 13:19:33,691 INFO spawned: 'nginx' with pid 13
+2024-07-24 13:19:33,694 INFO spawned: 'php-fpm' with pid 14
+2024-07-24 13:19:34,815 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 13:19:34,816 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 13:35:49,056 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-07-24 13:35:49,063 INFO supervisord started with pid 1
+2024-07-24 13:35:50,069 INFO spawned: 'nginx' with pid 14
+2024-07-24 13:35:50,073 INFO spawned: 'php-fpm' with pid 15
+2024-07-24 13:35:51,144 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 13:35:51,145 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 14:09:24,603 WARN received SIGTERM indicating exit request
+2024-07-24 14:09:24,613 INFO waiting for nginx, php-fpm to die
+2024-07-24 14:09:24,667 INFO stopped: php-fpm (exit status 0)
+2024-07-24 14:09:24,681 INFO stopped: nginx (exit status 0)
+2024-07-24 14:43:48,627 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-07-24 14:43:48,635 INFO supervisord started with pid 1
+2024-07-24 14:43:49,641 INFO spawned: 'nginx' with pid 7
+2024-07-24 14:43:49,645 INFO spawned: 'php-fpm' with pid 8
+2024-07-24 14:43:50,756 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 14:43:50,757 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-24 14:52:08,371 WARN received SIGQUIT indicating exit request
+2024-07-24 14:52:08,374 INFO waiting for nginx, php-fpm to die
+2024-07-24 14:52:08,382 INFO stopped: php-fpm (exit status 0)
+2024-07-24 14:52:08,386 INFO stopped: nginx (exit status 0)

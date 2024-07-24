@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 # Étape 1 : Construire l'application Vue.js
 FROM node:20 AS build
 WORKDIR /app

@@ -1,22 +1,28 @@
-FROM php:8.3-fpm
-#FROM bitnami/php-fpm:latest
+# Utiliser une image officielle PHP avec les extensions nécessaires
+FROM php:8.2-fpm
 
-# Install additional PHP extensions
+# Installer les dépendances nécessaires
 RUN apt-get update && apt-get install -y \
+    git \
+    curl \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
+    locales \
     zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
     unzip \
-    git \
     supervisor \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd mbstring pdo pdo_mysql xml bcmath
+    nginx \
+    libonig-dev
+
+# Installer les extensions PHP requises
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Set working directory
 WORKDIR /app
 
@@ -31,6 +37,8 @@ COPY .env.example .env
 
 # Copy Supervisor configuration file
 COPY supervisord.conf /etc/supervisord.conf
+
+COPY nginx.conf /etc/nginx/conf.d
 
 # Expose the port for php-fpm
 EXPOSE 9000
