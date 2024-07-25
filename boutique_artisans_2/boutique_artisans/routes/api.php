@@ -6,9 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ArtisanController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 
 // API resource routes for products and shops
@@ -37,19 +34,19 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
 
 // Admin-specific routes
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
-    Route::post('/admin/some-action', [AdminController::class, 'someAction']);
-});
+//Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+  //  Route::post('/admin/some-action', [AdminController::class, 'someAction']);
+//});
 
 // Artisan-specific routes
-Route::middleware(['auth:sanctum', 'role:artisan'])->group(function () {
-    Route::get('/artisan/store', [ArtisanController::class, 'getStore']);
-});
+//Route::middleware(['auth:sanctum', 'role:artisan'])->group(function () {
+//    Route::get('/artisan/store', [ArtisanController::class, 'getStore']);
+//});
 
 // User-specific routes
-Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
-    Route::get('/user/cart', [CartController::class, 'getCart']);
-});
+//Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+//    Route::get('/user/cart', [CartController::class, 'getCart']);
+//});
 
 // General user info route
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

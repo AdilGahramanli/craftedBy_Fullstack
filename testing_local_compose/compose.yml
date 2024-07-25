@@ -1,0 +1,109 @@
+services:
+  traefik:
+    image: traefik:latest
+    command:
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.email=adil.gahramanli@le-campus-numerique.fr"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entryPoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    networks:
+      - traefik-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`api.gahramanli.devlog25.le-campus.eu`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+
+  mysql:
+    image: mysql:5.7.44
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: laravelArtisans
+      MYSQL_USER: adilUser
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p'password'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: adilgahramanlidocker/todo-app:backend
+    container_name: backend
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravelArtisans
+      DB_USERNAME: adilUser
+      DB_PASSWORD: password
+    ports:
+      - "8000:8000"
+    networks:
+      - backend-network
+      - traefik-network
+    depends_on:
+      traefik:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.gahramanli.devlog25.le-campus.eu`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+
+  frontend:
+    image: adilgahramanlidocker/todo-app:frontend
+    container_name: frontend
+    ports:
+      - "8081:80"
+    networks:
+      - traefik-network
+    depends_on:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`www.gahramanli.devlog25.le-campus.eu`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - backend-network
+    depends_on:
+      - backend
+
+networks:
+  traefik-network:
+  backend-network:
+
+volumes:
+  mysql-data:

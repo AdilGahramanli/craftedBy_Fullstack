@@ -27,7 +27,7 @@ const authStore = useAuthStore();
 
 const getNewCsrfToken = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/sanctum/csrf-cookie', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +51,7 @@ const login = async () => {
   await getNewCsrfToken();
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/login', {
+    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const login = async () => {
 
 <!--const getNewCsrfToken = async () => {-->
 <!--  try {-->
-<!--    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {-->
+<!--    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/sanctum/csrf-cookie', {-->
 <!--      method: 'GET',-->
 <!--      headers: {-->
 <!--        'Accept': 'application/json',-->
@@ -140,7 +140,7 @@ const login = async () => {
 <!--  await getNewCsrfToken();-->
 
 <!--  try {-->
-<!--    const response = await fetch('http://127.0.0.1:8000/api/login', {-->
+<!--    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/api/login', {-->
 <!--      method: 'POST',-->
 <!--      headers: {-->
 <!--        'Content-Type': 'application/json',-->
@@ -206,7 +206,7 @@ const login = async () => {
 
 <!--&lt;!&ndash;const getNewCsrfToken = async () => {&ndash;&gt;-->
 <!--&lt;!&ndash;  try {&ndash;&gt;-->
-<!--&lt;!&ndash;    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {&ndash;&gt;-->
+<!--&lt;!&ndash;    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/sanctum/csrf-cookie', {&ndash;&gt;-->
 <!--&lt;!&ndash;      method: 'GET',&ndash;&gt;-->
 <!--&lt;!&ndash;      headers: {&ndash;&gt;-->
 <!--&lt;!&ndash;        'Accept': 'application/json',&ndash;&gt;-->
@@ -226,7 +226,7 @@ const login = async () => {
 <!--&lt;!&ndash;  await getNewCsrfToken();&ndash;&gt;-->
 
 <!--&lt;!&ndash;  try {&ndash;&gt;-->
-<!--&lt;!&ndash;    const response = await fetch('http://127.0.0.1:8000/api/login', {&ndash;&gt;-->
+<!--&lt;!&ndash;    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/api/login', {&ndash;&gt;-->
 <!--&lt;!&ndash;      method: 'POST',&ndash;&gt;-->
 <!--&lt;!&ndash;      headers: {&ndash;&gt;-->
 <!--&lt;!&ndash;        'Content-Type': 'application/json',&ndash;&gt;-->

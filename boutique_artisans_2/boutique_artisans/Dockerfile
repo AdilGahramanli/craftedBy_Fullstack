@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     supervisor \
     nginx \
-    libonig-dev
+    libonig-dev \
+    default-mysql-client
 
 # Installer les extensions PHP requises
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
@@ -30,15 +31,13 @@ WORKDIR /app
 COPY . .
 
 # Install composer dependencies
-RUN composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Copy over the environment file
 COPY .env.example .env
 
 # Copy Supervisor configuration file
 COPY supervisord.conf /etc/supervisord.conf
-
-COPY nginx.conf /etc/nginx/conf.d
 
 # Expose the port for php-fpm
 EXPOSE 9000

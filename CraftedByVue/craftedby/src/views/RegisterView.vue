@@ -33,7 +33,7 @@ const password = ref('');
 
 const getNewCsrfToken = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/sanctum/csrf-cookie', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -55,7 +55,7 @@ const registerUser = async () => {
   await getNewCsrfToken();
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/register', {
+    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

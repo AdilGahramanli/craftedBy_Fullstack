@@ -21,7 +21,7 @@ export const useAuthStore = defineStore('auth', () => {
     const fetchUser = async () => {
         if (token.value) {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/user')
+                const response = await axios.get('https://api.gahramanli.devlog25.le-campus.eu/api/user')
                 setUser(response.data)
             } catch (error) {
                 console.error('Error fetching user:', error)
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const login = async (credentials) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login', credentials)
+            const response = await axios.post('https://api.gahramanli.devlog25.le-campus.eu/api/login', credentials)
             setToken(response.data.token)
             await fetchUser()
         } catch (error) {
@@ -43,7 +43,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const register = async (userData) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/register', userData)
+            const response = await axios.post('https://api.gahramanli.devlog25.le-campus.eu/api/register', userData)
             setToken(response.data.token)
             await fetchUser()
         } catch (error) {
