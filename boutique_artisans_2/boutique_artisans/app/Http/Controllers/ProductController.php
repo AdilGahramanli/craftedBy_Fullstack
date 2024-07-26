@@ -3,113 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Http\Requests\StoreProduitRequest;
-use App\Http\Requests\UpdateProduitRequest;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
-    /**
-         * @OA\Get(
-         *     path="/products",
-         *     tags={"Products"},
-         *     summary="Get list of all products",
-         *     description="Returns list of products",
-         *     @OA\Response(
-         *         response=200,
-         *         description="Successful operation",
-         *     )
-         * )
-         */
     public function index()
     {
-        //
-        //return \App\Models\Product::all();
-        /*$products = Product::all();
-        return view('products', ['products' => $products]);*/
-
-        return $products = Product::all();
-
+        $products = Product::all();
+        return response()->json($products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProduitRequest $request)
+    public function store(StoreProductRequest $request)
     {
-       $product = Product::create($request->all());
-       return response()->json($product, 200);
-
+        $product = Product::create($request->all());
+        return response()->json($product, 201);
     }
-
-/**
-     * @OA\Get(
-     *     path="/products/{id}",
-     *     operationId="getProductById",
-     *     tags={"Products"},
-     *     summary="Get product details by ID",
-     *     description="Returns details of a specific product by ID.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="ID of the product to retrieve",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="9x508988-2d3g-44f6-ac72-0f93eac22rrd"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @OA\MediaType(
-     *             mediaType="text/html"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Product not found"
-     *     )
-     * )
-     */
 
     public function show($id)
     {
-        //
-        /*$product = Product::findOrFail($id);
-        return view('product', ['product' => $product]);*/
-
-        return $product = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
+        return response()->json($product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $produit)
+    public function edit(Product $product)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        return $product->update($request->all());
+        $product->update($request->all());
+        return response()->json($product);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $produit)
+    public function destroy(Product $product)
     {
-        return $produit->delete();
+        $product->delete();
+        return response()->json(null, 204);
     }
 }

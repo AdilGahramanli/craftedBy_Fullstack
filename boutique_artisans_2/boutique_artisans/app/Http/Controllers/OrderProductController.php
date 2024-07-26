@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OrderProduct;
 use App\Http\Requests\StoreOrderProductRequest;
 use App\Http\Requests\UpdateOrderProductRequest;
+use Illuminate\Http\Request;
 
 class OrderProductController extends Controller
 {
@@ -13,7 +14,8 @@ class OrderProductController extends Controller
      */
     public function index()
     {
-        //
+        $orderProducts = OrderProduct::all();
+        return response()->json($orderProducts);
     }
 
     /**
@@ -29,7 +31,8 @@ class OrderProductController extends Controller
      */
     public function store(StoreOrderProductRequest $request)
     {
-        //
+        $orderProduct = OrderProduct::create($request->all());
+        return response()->json($orderProduct, 201);
     }
 
     /**
@@ -37,7 +40,7 @@ class OrderProductController extends Controller
      */
     public function show(OrderProduct $orderProduct)
     {
-        //
+        return response()->json($orderProduct);
     }
 
     /**
@@ -53,7 +56,8 @@ class OrderProductController extends Controller
      */
     public function update(UpdateOrderProductRequest $request, OrderProduct $orderProduct)
     {
-        //
+        $orderProduct->update($request->all());
+        return response()->json($orderProduct);
     }
 
     /**
@@ -61,6 +65,7 @@ class OrderProductController extends Controller
      */
     public function destroy(OrderProduct $orderProduct)
     {
-        //
+        $orderProduct->delete();
+        return response()->json(null, 204);
     }
 }

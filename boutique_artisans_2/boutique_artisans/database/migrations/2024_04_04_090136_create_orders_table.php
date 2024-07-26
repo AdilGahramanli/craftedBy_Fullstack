@@ -6,26 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('orders_uuid')->primary();
-            // $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->uuid('id')->primary();
             $table->date('date');
             $table->integer('total');
             $table->timestamps();
-            #$table->foreignId('user_id')->constrained();
+        });
+
+        Schema::create('order_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
+        Schema::dropIfExists('order_user');
         Schema::dropIfExists('orders');
     }
 };
