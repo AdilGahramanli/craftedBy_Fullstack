@@ -14,7 +14,7 @@ namespace App\Http\Controllers;
  *   ),
  *   @OA\Server(
  *     description="API Server",
- *     url="http://127.0.0.1:8000/api"
+ *     url="https://api.gahramanli.devlog25.le-campus.eu/api"
  *   )
  * )
  */

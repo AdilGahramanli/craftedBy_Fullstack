@@ -119,7 +119,7 @@ onMounted(() => {
 
 <!--const fetchUserData = async () => {-->
 <!--  try {-->
-<!--    const response = await fetch('http://127.0.0.1:8000/api/user', {-->
+<!--    const response = await fetch('https://api.gahramanli.devlog25.le-campus.eu/api/user', {-->
 <!--      method: 'GET',-->
 <!--      headers: {-->
 <!--        'Authorization': `Bearer ${authStore.token}`-->

@@ -8,7 +8,7 @@ const route = useRoute();
 const productSelected = ref(null);
 const productId = route.params.id;
 
-fetch(`http://127.0.0.1:8000/api/products/${productId}`)
+fetch(`https://api.gahramanli.devlog25.le-campus.eu/api/products/${productId}`)
     .then(res => res.json())
     .then(json => productSelected.value = json);
 </script>

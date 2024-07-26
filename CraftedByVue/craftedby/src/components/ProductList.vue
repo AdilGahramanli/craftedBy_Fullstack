@@ -32,7 +32,7 @@ const cartStore = useCartStore();
 const products = ref([]);
 
 onMounted(() => {
-  fetch('http://127.0.0.1:8000/api/products')
+  fetch('https://api.gahramanli.devlog25.le-campus.eu/api/products')
       .then(response => response.json())
       .then(data => {
         console.log('data', data);
