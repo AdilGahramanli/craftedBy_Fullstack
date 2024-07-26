@@ -17,18 +17,25 @@ Route::middleware('api')->get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);
 });
 
-// Authentication routes
-Route::post('/register', [AuthenticationController::class, 'register']);
-Route::post('/login', [AuthenticationController::class, 'login']);
-Route::post('/logout', [AuthenticationController::class, 'logout'])->middleware('auth:sanctum');
+Route::middleware(['cors'])->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+
+
+    Route::post('/register', [AuthenticationController::class, 'register']);
+    Route::post('/login', [AuthenticationController::class, 'login']);
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->middleware('auth:sanctum');
 
 // Order routes
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/orders', [OrderController::class, 'store']);
-    Route::post('/attachProduct', [OrderController::class, 'attachProductToOrderToUser']);
-    Route::delete('/orders/{order}/products/{product}', [OrderController::class, 'removeProductFromOrder']);
-    Route::get('/orders/{order}/products', [OrderController::class, 'getProductsInOrder']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/orders', [OrderController::class, 'store']);
+        Route::post('/attachProduct', [OrderController::class, 'attachProductToOrderToUser']);
+        Route::delete('/orders/{order}/products/{product}', [OrderController::class, 'removeProductFromOrder']);
+        Route::get('/orders/{order}/products', [OrderController::class, 'getProductsInOrder']);
+    });
 });
+
+// Authentication routes
+
 
 // Fetch authenticated user info
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
