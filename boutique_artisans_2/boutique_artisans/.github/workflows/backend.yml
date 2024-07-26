@@ -1,11 +1,16 @@
+
 name: backend
+
 
 on:
   push:
     branches:
       - main
+      - fixCors
       - develop
       - fixCors
+      - master
+
 
 jobs:
   build:

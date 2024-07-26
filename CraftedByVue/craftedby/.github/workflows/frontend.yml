@@ -1,11 +1,14 @@
+
 name: frontend
 
 on:
   push:
     branches:
       - main
+      - fixCors
       - develop
       - fixCors
+
 
 jobs:
   build:
