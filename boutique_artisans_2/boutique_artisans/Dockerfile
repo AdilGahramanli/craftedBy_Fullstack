@@ -24,23 +24,28 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy the application files
+# Copier les fichiers de l'application
 COPY . .
 
-# Install composer dependencies
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+# Nettoyer le cache de Composer
+RUN composer clear-cache
 
-# Copy over the environment file
+# Remove the vendor directory if it exists
+RUN rm -rf /app/vendor
+# Installer les dépendances de Composer
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader --no-plugins --no-scripts
+
+# Copier le fichier d'environnement
 COPY .env.example .env
 
-# Copy Supervisor configuration file
+# Copier le fichier de configuration de Supervisor
 COPY supervisord.conf /etc/supervisord.conf
 
-# Expose the port for php-fpm
+# Exposer le port pour php-fpm
 EXPOSE 9000
 
-# Start Supervisor
+# Démarrer Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
