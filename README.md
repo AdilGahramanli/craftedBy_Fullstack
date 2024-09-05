@@ -243,3 +243,6 @@ Ce fichier Docker Compose unique orchestre le déploiement des services backend 
 
 Utilisation
 Après le déploiement, l'application sera disponible à l'adresse www.gahramanli.devlog25.le-campus.eu
+
+#Pipeline CI/CD
+Trouver les fichiers de configuration pipeline dans .GitHub/ de chaque service.
