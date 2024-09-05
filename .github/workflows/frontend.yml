@@ -53,11 +53,11 @@ jobs:
         run: |
           ssh-keyscan -H 163.172.182.232 >> ~/.ssh/known_hosts
 
-      - name: down compose
-        run: |
-          ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
-          docker-compose down frontend
-          '
+#      - name: down compose
+#        run: |
+#          ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
+#          docker-compose down frontend
+#          '
 
       # Copy the Docker Compose file to the remote server
       #- name: Copy Docker Compose file to server
@@ -68,7 +68,6 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
-          cd ~/craftedby;
-          docker-compose pull api_laravel;
-          docker-compose up -d api_laravel;
+          docker-compose down frontend;
+          docker-compose up -d;
           '
