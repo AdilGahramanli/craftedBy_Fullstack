@@ -1,4 +1,4 @@
-# *** craftedBy_Fullstack ***
+# ** craftedBy_Fullstack **
 
 # CraftedBy - Partie Backend en Laravel 11
 
@@ -245,4 +245,4 @@ Utilisation
 Après le déploiement, l'application sera disponible à l'adresse www.gahramanli.devlog25.le-campus.eu
 
 #Pipeline CI/CD
-Trouver les fichiers de configuration pipeline dans .GitHub/ de chaque service.
+Trouver les fichiers de configuration pipeline dans .GitHub/workflows à la racine du projet. Quand on push une nouvelle modification la pipeline se lance dans Github/Actions.
