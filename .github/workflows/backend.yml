@@ -40,6 +40,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
+          context: ./boutique_artisans_2/boutique_artisans
           push: true
           tags: adilgahramanlidocker/backend-craftedby:1.0.7
 
@@ -54,23 +55,21 @@ jobs:
         run: |
           ssh-keyscan -H 163.172.182.232 >> ~/.ssh/known_hosts
 
-      - name: donw compose
+      - name: down compose
         run: |
           ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
-          cd ~/craftedby;
-          docker-compose down api_laravel
+          docker-compose down backend
           '
 
       # Copy the Docker Compose file to the remote server
-      - name: Copy Docker Compose file to server
-        run: |
-          scp -rp docker-compose.deploy.yaml campus@163.172.182.232:~/craftedby/docker-compose.yaml
+      #- name: Copy Docker Compose file to server
+       # run: |
+        #  scp -rp boutique_artisans_2/boutique_artisans/compose.yml campus@163.172.182.232:~/craftedby/docker-compose.yaml
 
       # Connect to the server and deploy the Docker container
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
-          cd ~/craftedby;
-          docker-compose pull api_laravel;
-          docker-compose up -d api_laravel;
+          docker-compose down;
+          docker-compose up -d;
           '

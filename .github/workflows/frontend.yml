@@ -38,8 +38,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
+          context: ./CraftedByVue/craftedby
           push: true
-          tags: adilgahramanlidocker/backend-craftedby:1.0.7
+          tags: adilgahramanlidocker/frontend-craftedby:1.0.7
 
       # Set up SSH agent with the provided private key
       - name: Set up SSH agent
@@ -52,17 +53,16 @@ jobs:
         run: |
           ssh-keyscan -H 163.172.182.232 >> ~/.ssh/known_hosts
 
-      - name: donw compose
+      - name: down compose
         run: |
           ssh -o StrictHostKeyChecking=no campus@163.172.182.232 '
-          cd ~/craftedby;
-          docker-compose down api_laravel
+          docker-compose down frontend
           '
 
       # Copy the Docker Compose file to the remote server
-      - name: Copy Docker Compose file to server
-        run: |
-          scp -rp docker-compose.deploy.yaml campus@163.172.182.232:~/craftedby/docker-compose.yaml
+      #- name: Copy Docker Compose file to server
+       # run: |
+        #  scp -rp CraftedByVue/craftedby/compose.yml campus@163.172.182.232:~/craftedby/docker-compose.yaml
 
       # Connect to the server and deploy the Docker container
       - name: Deploy to server
